@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<h1>Portfolio</h1>
+<section id="main-content"></section>
+
+<div id="projectpage-view-container"></div>
+
+
+<script type="application/javascript" src="vendor.js"></script>
+<script type="application/javascript" src="app.js"></script>
+
+<script id="project-tile-template" type="text/template">
+    <div class="content">
+        <h1 class="title"><%= title %></h1>
+        <img src="<%=imageURL%>">
+    </div>
+</script>
+
+<script id="project-page-template" type="text/template">
+    <h1><%=title%></h1>
+    <img src="<%=imageURL%>">
+    <p><%=content%></p>
+</script>
+
+<script>
+	require("initialize");
+</script>
+</body>
+</html>
