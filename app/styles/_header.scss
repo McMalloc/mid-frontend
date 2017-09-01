@@ -1,0 +1,60 @@
+header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  background-color: white;
+
+  &.header-container {
+    position: absolute;
+  }
+
+  #h2-logo {
+    height: $header-height-lg;
+    width: auto;
+  }
+}
+
+nav {
+  font-family: $font;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  color: $light;
+  font-weight: 900;
+
+  &.year-select {
+    top: 155px;
+    font-size: 20px;
+    font-weight: 700;
+
+    li {
+      margin-left: 18px;
+      &.active {
+        color: $dark;
+      }
+    }
+  }
+
+  &.main-menu {
+    text-transform: uppercase;
+    font-size: 14px;
+
+    li {
+      margin-left: 24px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+    }
+  }
+
+  li.active {
+    color: $dark;
+  }
+}

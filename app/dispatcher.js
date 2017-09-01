@@ -1,14 +1,15 @@
-var ProjectPage = require("projectpage").ProjectPage;
-var portfolio = require("portfolio").instance;
+let ProjectPage = require("projectpage").ProjectPage;
+let portfolio = require("portfolio").instance;
 
-var projectpage;
+let projectpage;
 
-var init = function() {
+let init = function() {
 	projectpage = new ProjectPage();
 };
 
-var dispatch = function(slug) {
-	var model = portfolio.findWhere({slug: slug});
+let dispatch = function(slug) {
+	if (!slug) projectpage.hide();
+	let model = portfolio.findWhere({slug: slug});
 	projectpage.render(model);
 };
 

@@ -1,0 +1,71 @@
+.project-tile {
+  width: 100%;
+  height: $tile-height;
+  margin-bottom: $tile-padding;
+  box-sizing: border-box;
+
+  .content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    cursor: pointer;
+
+    &:before {
+      content: " ";
+      opacity: 0;
+      z-index: 50;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      transition: opacity $fade-speed;
+    }
+    &:hover {
+      &:before {
+        opacity: 0.5;
+      }
+
+      h1 {
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      z-index: 100;
+      opacity: 0;
+      transition: opacity $fade-speed;
+      position: relative;
+      color: white;
+      margin: 24px;
+      &:after {
+        content: " ";
+        border-bottom: 5px solid white;
+        width: 20px;
+        left: 0;
+        bottom: -30px;
+        position: absolute;
+      }
+    }
+
+    img {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.main-tile {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#72c2ea+0,0091da+100 */
+  background: #72c2ea; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #72c2ea 0%, #0091da 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #72c2ea 0%,#0091da 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #72c2ea 0%,#0091da 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#72c2ea', endColorstr='#0091da',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  height: $tile-height;
+}

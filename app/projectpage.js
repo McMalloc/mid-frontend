@@ -3,9 +3,7 @@ var Backbone = require("backbone");
 var ProjectPage = Backbone.View.extend({
 	el: $("#projectpage-view-container"),
 	events: {
-		"click .icon":          "open",
-		"click .button.edit":   "openEditDialog",
-		"click .button.delete": "destroy"
+		"click":          "hide"
 	},
 
 	initialize: function() {
@@ -14,12 +12,19 @@ var ProjectPage = Backbone.View.extend({
 
 	template: _.template($("#project-page-template").text()),
 
+	hide: function() {
+		this.$el.addClass("hide");
+		location.hash = "";
+	},
+
 	render: function(model) {
+		if (model === undefined) return;
 		this.$el.html(this.template({
 			title: model.get("title").rendered,
 			imageURL: model.get("featuredImgURL"),
 			content: model.get("content").rendered
 		}));
+		this.$el.removeClass("hide");
 		return this;
 	}
 });

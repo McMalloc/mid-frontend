@@ -9,31 +9,47 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
+<header>
+    <img src="logo_breit.svg">
+</header>
+<!--VIEW HOOKS-->
+<nav id="year-select"></nav>
 
-<h1>Portfolio</h1>
-<section id="main-content"></section>
+<div class="container-fluid">
+    <section class="row no-gutter" id="main-content">
+        <div class="main-tile col-xl-6 col-md-8 col-sm-12"></div>
+    </section>
+</div>
 
-<div id="projectpage-view-container"></div>
+<div class="fullscreen-overlay hide" id="projectpage-view-container">
 
+</div>
+<!--END VIEW HOOKS-->
 
-<script type="application/javascript" src="vendor.js"></script>
-<script type="application/javascript" src="app.js"></script>
-
+<!--TEMPLATES-->
 <script id="project-tile-template" type="text/template">
     <div class="content">
-        <h1 class="title"><%= title %></h1>
         <img src="<%=imageURL%>">
+        <h1 class="title"><%= title %></h1>
     </div>
 </script>
-
 <script id="project-page-template" type="text/template">
+    <img src="logo_breit.svg">
     <h1><%=title%></h1>
     <img src="<%=imageURL%>">
     <p><%=content%></p>
 </script>
-
-<script>
-	require("initialize");
+<script id="year-select-template" type="text/template">
+    <ul>
+        <% _.each(semesters, function(semester) { %>
+        <li class="year" data-year="<%= semester %>"><%= semester %></li>
+        <% }) %>
+    </ul>
 </script>
+<!--END TEMPLATES-->
+
+<!--INCLUDES-->
+<script type="application/javascript" src="vendor.js"></script>
+<script type="application/javascript" src="app.js"></script>
 </body>
 </html>

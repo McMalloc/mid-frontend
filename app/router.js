@@ -3,11 +3,16 @@ var dispatcher = require("dispatcher");
 
 var Router = Backbone.Router.extend({
 	routes: {
-		"project/:slug": "showProject"    // #help
+		"project/:slug": "showProject",    // #help
+		"": "hideProject"
 	},
 
 	showProject: function(slug) {
 		dispatcher.dispatch(slug);
+	},
+
+	hideProject: function() {
+		dispatcher.dispatch(false);
 	}
 });
 

@@ -9,6 +9,10 @@ exports.files = {
 	stylesheets: {joinTo: 'app.css'}
 };
 
+exports.conventions = {
+	ignored: /^(bower_components\/bootstrap-less(-themes)?|app\/styles\/overrides|(.*?\/)?[_]\w*)/
+};
+
 exports.plugins = {
 	babel: {presets: ['latest']}
 };
@@ -20,11 +24,16 @@ exports.npm = {
 		_: 'underscore'
 	},
 	styles: {
-		normalize: ['dist/css/bootstrap.css'],
-		bootstrap: ['dist/css/bootstrap.css']
+		bootstrap: ['dist/css/bootstrap-grid.css'],
+		"normalize.css": ['normalize.css']
 	}
 };
 
+exports.modules = {
+	autoRequire: {
+		'app.js': ['initialize'],
+	},
+};
 // exports.plugins = {
 // 	sass: {
 // 		options: {

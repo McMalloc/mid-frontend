@@ -1,15 +1,13 @@
-// var base = location.host + "/mid/";
-var base = "http://localhost/mid/";
+// let base = location.host + "/mid/";
+const base = "http://localhost/mid/";
+let semesters = [];
+let initialized = $.Deferred();
 
-
-var init = function() {
-	var initialized = $.Deferred();
-	var semesters = [];
-
+let init = function() {
 	$.when( $.ajax( base + "wp-json/wp/v2/categories" ) ).then(function( data ) {
 
 		_.each(data, function(category) {
-			var semester = {};
+			let semester = {};
 			if (category.slug.indexOf("sose") !== -1) {
 				semester.term = "sommer";
 			} else if (category.slug.indexOf("wise") !== -1) {
@@ -25,20 +23,27 @@ var init = function() {
 
 		initialized.resolve(semesters);
 	});
-
-	return initialized;
 };
 
-var retrievePostsByYear = function(year) {
-	var prepared = $.Deferred();
+let getSemesters = function() {
+	let prepared = $.Deferred();
+	initialized.then(semesters => {
+		prepared.resolve(semesters);
+	});
+	return $.when(prepared);
+};
 
-	init().then(function(semesters) {
-		var ids = _.chain(semesters)
-			.filter(function(semester) {
+let retrievePostsByYear = function(year) {
+	let prepared = $.Deferred();
+
+	initialized.then(semesters => {
+		let ids =
+			_.chain(semesters)
+			.filter(semester => {
 				return semester.year === year;
 			})
 			.pluck("id")
-			.reduce(function(memo, id) {
+			.reduce((memo, id) => {
 				if (memo.length === 0) return id;
 				return memo + "," + id
 			}, "").value();
@@ -46,9 +51,10 @@ var retrievePostsByYear = function(year) {
 		$.when(
 			$.ajax(base + "wp-json/wp/v2/posts?categories=" + ids + "&_embed=1")
 		).done(function(result) {
-			var preparedDataset = [];
+			let preparedDataset = [];
 			_(result).each(function(project) {
 				if (project._embedded["wp:featuredmedia"]) project.featuredImgURL = project._embedded["wp:featuredmedia"][0].media_details.sizes.thumbnail.source_url;
+				project.year = year;
 				preparedDataset.push(project);
 			});
 			prepared.resolve(preparedDataset);
@@ -59,5 +65,7 @@ var retrievePostsByYear = function(year) {
 };
 
 module.exports = {
-	retrievePostsByYear: retrievePostsByYear
+	retrievePostsByYear: retrievePostsByYear,
+	getSemesters: getSemesters,
+	init: init
 };

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,900&subset=latin-ext');
+@import 'vars';
+@import 'typo';
+@import 'tiles';
+@import 'overlay';
+@import 'layout';
+@import 'header';
+
+.hide {
+  display: none;
+}
+
+//bootstrap overrides
+/* remove spacing between middle columns */
+.row.no-gutter [class*='col-']:not(:first-child):not(:last-child) {
+  padding-right:$tile-padding/2;
+  padding-left:$tile-padding/2;
+}
+/* remove right padding from first column */
+.row.no-gutter [class*='col-']:first-child {
+  padding-right:$tile-padding/2;
+}
+/* remove left padding from last column */
+.row.no-gutter [class*='col-']:last-child {
+  padding-left:$tile-padding/2;
+}
