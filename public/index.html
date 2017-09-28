@@ -1,70 +1,47 @@
-<!doctype html>
-<html lang="">
-<head>
+<!DOCTYPE html>
+<html lang="de" ng-app="mid">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="app.css">
-</head>
-<body>
-
-<!--VIEW HOOKS-->
-<div class="container">
-    <header class="row">
-        <div class="header-container col-md-12">
-            <img id="h2-logo" src="logo_breit.svg">
-            <nav class="main-menu" id="main-menu">
-                <ul>
-                    <li>Institut</li>
-                    <li>Projekte</li>
-                    <li>Suche</li>
-                </ul>
-            </nav>
-            <nav class="year-select" id="year-select"></nav>
-        </div>
+    <base href="/">
+  </head>
+  <body ng-controller="mainCtrl" load-next>
+    <header ng-controller="navCtrl"><img id="h2-logo" src="logo_breit.svg">
+      <nav class="main-menu" id="main-menu">
+        <ul>
+          <li>Institut</li>
+          <li>Projekte</li>
+          <li>Suche</li>
+        </ul>
+      </nav>
+      <nav class="year-select" id="year-select">
+        <ul>
+          <li ng-cloak auto-scroll="year" ng-repeat="year in years" ng-click="retrieve(year)">{{year}}</li>
+        </ul>
+      </nav>
     </header>
-
-    <section class="row no-gutter" id="main-content">
-        <div class="col-xl-6 col-md-8 col-sm-12">
-            <div class="main-tile">
-
-            </div>
-        </div>
-    </section>
-</div>
-
-<div class="fullscreen-overlay hide" id="projectpage-view-container">
-
-</div>
-<div style="height:1000px;"></div>
-<!--END VIEW HOOKS-->
-
-<!--TEMPLATES-->
-<script id="project-tile-template" type="text/template">
-    <div data-fromyear="<%=year%>" class="content">
-        <img src="<%=imageURL%>">
-        <h1 class="title"><%= title %></h1>
+    <div class="fullscreen-overlay" id="projectpage-view-container" ng-controller="projectCtrl" ng-show="visible">
+      <header><img id="h2-logo" src="logo_breit.svg">
+        <nav class="main-menu"></nav>
+      </header>
+      <div class="main-content" ng-bind-html="project.content"></div>
+      <div ng-repeat="img in project.images"><img ng-src="{{img}}"></div>
     </div>
-</script>
-<script id="project-page-template" type="text/template">
-    <img src="logo_breit.svg">
-    <h1><%=title%></h1>
-    <img src="<%=imageURL%>">
-    <p><%=content%></p>
-</script>
-<script id="year-select-template" type="text/template">
-    <ul>
-        <% _.each(years, function(year) { %>
-        <li class="year <% if (year === activeYear) {%>active<%}%>" data-year="<%= year %>"><%= year %></li>
-        <% }) %>
-    </ul>
-</script>
-<!--END TEMPLATES-->
-
-<!--INCLUDES-->
-<script type="application/javascript" src="vendor.js"></script>
-<script type="application/javascript" src="app.js"></script>
-</body>
+    <div class="container-fluid" id="portfolio" ng-controller="portfolioCtrl">
+      <section class="row no-gutter" id="main-content">
+        <div class="col-xl-6 col-md-8 col-sm-12 main-tile"></div>
+        <div class="project-tile col-sm-4" ng-repeat="post in posts" data-year="{{post.year}}" ng-click="show(post.id)">
+          <div class="content"><img ng-src="{{post.imageUrl}}">
+            <h1 class="title">{{post.title}}</h1>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="application/javascript" src="vendor.js"></script>
+    <script type="application/javascript" src="app.js"></script>
+  </body>
 </html>

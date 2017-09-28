@@ -1,0 +1,7 @@
+#portfolio.container-fluid(ng-controller="portfolioCtrl")
+    section#main-content.row.no-gutter
+        .col-xl-6.col-md-8.col-sm-12.main-tile
+        .project-tile.col-sm-4(ng-repeat="post in posts", data-year="{{post.year}}", ng-click="show(post.id)")
+            .content
+                img(ng-src="{{post.imageUrl}}")
+                h1.title {{post.title}}

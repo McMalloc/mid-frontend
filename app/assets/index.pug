@@ -1,0 +1,19 @@
+doctype html
+html(lang='de', ng-app="mid")
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='x-ua-compatible', content='ie=edge')
+        title
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='app.css')
+        base(href="/")
+
+    body(ng-controller="mainCtrl", load-next)
+
+        include nav-template
+        include project-template
+        include portfolio-template
+
+        script(type='application/javascript', src='vendor.js')
+        script(type='application/javascript', src='app.js')

@@ -1,11 +1,20 @@
-var Backbone = require("backbone");
+let PortfolioCtrl = function($scope, $location, wordpress) {
 
-var Project = Backbone.Model.extend({});
-var Portfolio = Backbone.Collection.extend({
-	model: Project
-});
-var portfolio = new Portfolio();
+	wordpress.retrieve(2017);
+	$scope.posts = wordpress.posts.getAll();
 
-module.exports = {
-	instance: portfolio
+	$scope.$on("$locationChangeSuccess", () => {
+		wordpress.retrieve($location.search().year);
+	});
+
+	$scope.show = function(id) {
+		$location.path("project/" + id);
+	}
 };
+
+angular.module("mid").controller("portfolioCtrl", [
+	"$scope",
+	"$location",
+	"wordpress",
+	PortfolioCtrl
+]);

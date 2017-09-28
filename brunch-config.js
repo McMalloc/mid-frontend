@@ -2,26 +2,62 @@
 exports.files = {
 	javascripts: {
 		joinTo: {
-			'vendor.js': /^(?!app)/, // Files that are not in `app` dir.
-			'app.js': /^app/
+			'vendor.js': [
+				"node_modules/jquery/dist/jquery.js",
+				"node_modules/angular/angular.js",
+				"node_modules/angular-route/angular-route.js",
+				"node_modules/angular-sanitize/angular-sanitize.js",
+				"node_modules/underscore/underscore.js"
+			],
+			'app.js': [
+				"app/*.js"
+			]
 		}
 	},
-	stylesheets: {joinTo: 'app.css'}
+	stylesheets: {
+		joinTo: {
+			'app.css': [
+				"node_modules/bootstrap/dist/css/bootstrap-reboot.css",
+				"node_modules/bootstrap/dist/css/bootstrap-grid.css",
+				"app/styles/main.scss"
+			]
+		}
+	}
 };
 
-exports.conventions = {
-	ignored: /^(bower_components\/bootstrap-less(-themes)?|app\/styles\/overrides|(.*?\/)?[_]\w*)/
+exports.paths = {
+	watched: [
+		"node_modules/jquery/dist/jquery.js",
+		"node_modules/angular/angular.js",
+		"node_modules/angular-route/angular-route.js",
+		"node_modules/angular-sanitize/angular-sanitize.js",
+		"node_modules/underscore/underscore.js",
+
+		"node_modules/bootstrap/dist/css/bootstrap-reboot.css",
+		"node_modules/bootstrap/dist/css/bootstrap-grid.css",
+
+		"app/styles/",
+		"app/assets/",
+		"app/"
+	]
 };
 
 exports.plugins = {
-	babel: {presets: ['latest']}
+	autoReload: {
+		enabled: {
+			css: true,
+			js: true,
+			assets: true
+		}
+	}
 };
 
 exports.npm = {
-	enabled: true,
+	enabled: false,
 	globals: {
 		$: 'jquery',
-		_: 'underscore'
+		_: 'underscore',
+		angular: 'angular'
 	},
 	styles: {
 		bootstrap: ['dist/css/bootstrap-grid.css'],
@@ -34,12 +70,12 @@ exports.modules = {
 		'app.js': ['initialize'],
 	},
 };
-// exports.plugins = {
-// 	sass: {
-// 		options: {
-// 			includePaths: [
-// 				'node_modules/bootstrap/dist/css/bootstrap.css'
-// 			]
-// 		}
-// 	}
-// };
+exports.plugins = {
+	sass: {
+		options: {
+			includePaths: [
+				'node_modules/bootstrap/dist/css/bootstrap-grid.css'
+			]
+		}
+	}
+};

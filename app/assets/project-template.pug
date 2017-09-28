@@ -1,0 +1,7 @@
+#projectpage-view-container.fullscreen-overlay(ng-controller="projectCtrl", ng-show="visible")
+    header
+        img#h2-logo(src='logo_breit.svg')
+        nav.main-menu
+    .main-content(ng-bind-html="project.content")
+    div(ng-repeat="img in project.images")
+        img(ng-src="{{img}}")

@@ -1,0 +1,10 @@
+header(ng-controller="navCtrl")
+    img#h2-logo(src='logo_breit.svg')
+    nav#main-menu.main-menu
+        ul
+            li Institut
+            li Projekte
+            li Suche
+    nav#year-select.year-select
+        ul
+            li(ng-cloak, auto-scroll="year", ng-repeat="year in years", ng-click="retrieve(year)") {{year}}
